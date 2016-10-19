@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Selección de Variables</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMatriz">
+    <property name="title">
+     <string>Matriz</string>
+    </property>
+    <widget class="QMenu" name="menuTestores_T_picos_de_Zhuravliov">
+     <property name="title">
+      <string>Testores Típicos de Zhuravliov</string>
+     </property>
+     <addaction name="actionMatriz_de_Aprendizaje"/>
+     <addaction name="actionMatriz_de_Diferencias"/>
+     <addaction name="actionMatriz_B_sica"/>
+    </widget>
+    <addaction name="menuTestores_T_picos_de_Zhuravliov"/>
+    <addaction name="actionTestores_T_picos_de_Goldman"/>
+   </widget>
+   <widget class="QMenu" name="menuTestor">
+    <property name="title">
+     <string>Testores</string>
+    </property>
+    <widget class="QMenu" name="menuTestores_T_picos_de_Zhuravliov_2">
+     <property name="title">
+      <string>Testores Típicos de Zhuravliov</string>
+     </property>
+     <widget class="QMenu" name="menuEscala_exterior">
+      <property name="title">
+       <string>Escala exterior</string>
+      </property>
+      <addaction name="actionAlgoritmo_BT"/>
+      <addaction name="actionAlgoritmo_LEX"/>
+     </widget>
+     <addaction name="menuEscala_exterior"/>
+     <addaction name="actionEscala_interior"/>
+    </widget>
+    <addaction name="menuTestores_T_picos_de_Zhuravliov_2"/>
+    <addaction name="actionTestores_T_picos_de_Goldman_2"/>
+   </widget>
+   <addaction name="menuMatriz"/>
+   <addaction name="menuTestor"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionTestores_T_picos_de_Goldman">
+   <property name="text">
+    <string>Testores Típicos de Goldman</string>
+   </property>
+  </action>
+  <action name="actionTestores_T_picos_de_Goldman_2">
+   <property name="text">
+    <string>Testores Típicos de Goldman</string>
+   </property>
+  </action>
+  <action name="actionMatriz_de_Aprendizaje">
+   <property name="text">
+    <string>Matriz de Aprendizaje</string>
+   </property>
+  </action>
+  <action name="actionMatriz_de_Diferencias">
+   <property name="text">
+    <string>Matriz de Diferencias</string>
+   </property>
+  </action>
+  <action name="actionMatriz_B_sica">
+   <property name="text">
+    <string>Matriz Básica</string>
+   </property>
+  </action>
+  <action name="actionEscala_interior">
+   <property name="text">
+    <string>Escala interior</string>
+   </property>
+  </action>
+  <action name="actionAlgoritmo_BT">
+   <property name="text">
+    <string>Algoritmo BT</string>
+   </property>
+  </action>
+  <action name="actionAlgoritmo_LEX">
+   <property name="text">
+    <string>Algoritmo LEX</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
