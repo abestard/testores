@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     teoria_de_testores.cpp \
     bits.cpp \
     bt.cpp \
-    mythread.cpp
+    mythread.cpp \
+    br.cpp
 
 HEADERS  += mainwindow.h \
     ma.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     teoria_de_testores.h \
     bits.h \
     bt.h \
-    mythread.h
+    mythread.h \
+    br.h
 
 FORMS    += mainwindow.ui \
     ma.ui \
@@ -48,4 +50,5 @@ FORMS    += mainwindow.ui \
     generar_md.ui \
     lex.ui \
     ma_md.ui \
-    bt.ui
+    bt.ui \
+    br.ui

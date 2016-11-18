@@ -52,6 +52,7 @@
       </property>
       <addaction name="actionAlgoritmo_BT"/>
       <addaction name="actionAlgoritmo_LEX"/>
+      <addaction name="actionAlgoritmo_BR"/>
      </widget>
      <addaction name="menuEscala_exterior"/>
      <addaction name="actionEscala_interior"/>
@@ -109,6 +110,11 @@
   <action name="actionAlgoritmo_LEX">
    <property name="text">
     <string>Algoritmo LEX</string>
+   </property>
+  </action>
+  <action name="actionAlgoritmo_BR">
+   <property name="text">
+    <string>Algoritmo BR</string>
    </property>
   </action>
  </widget>

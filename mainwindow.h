@@ -5,6 +5,7 @@
 #include "mb.h"
 #include "bt.h"
 #include "lex.h"
+#include "br.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -30,6 +31,8 @@ private slots:
 
     void on_actionAlgoritmo_LEX_triggered();
 
+    void on_actionAlgoritmo_BR_triggered();
+
 private:
     Ui::MainWindow *ui;
     ma v_ma;
@@ -37,6 +40,7 @@ private:
     mb v_mb;
     BT v_bt;
     lex v_lex;
+    br v_br;
 };
 
 #endif // MAINWINDOW_H

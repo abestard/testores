@@ -18,4 +18,8 @@ void MyThread::run( ){
     }else
        if( Nombre == "LEX" )
           Algoritmos->Start_LEX( mat );
+       else
+         if( Nombre == "BR" )
+             Algoritmos->Algoritmo_BR( mat );
+
 }

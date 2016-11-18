@@ -397,7 +397,229 @@ void Teoria_de_Testores::Algortitmo_LEX( bits mask1, int nF, int pp ){
 }
 /** End Algoritmo LEX **/
 
+/** Algoritmo BR **/
 
+
+vi Teoria_de_Testores::subst( vi V, int x, int p ){
+        while( (int)V.size() >= p )
+            V.pop_back();
+        V.push_back( x );
+        return V;
+}
+
+vi Teoria_de_Testores::elim( vi V, int x ){
+        V.erase( V.begin() );
+        return V;
+}
+
+bool Teoria_de_Testores::col_testor( int x ){
+        for( int i = 0; i < Artic; i ++ )
+            if( MB[i]->getbit(x) == false )  return false;
+        return true;
+}
+
+vi Teoria_de_Testores::matrixaceptacion( vi V ){
+    vi am = vi( Artic, 0 );
+   for( int i = 0; i < (int)V.size(); i ++ )
+      for( int j = 0; j < Artic; j ++ )
+          if( MB[j]->getbit(V[i]) == true )
+                am[j] ++;
+    return am;
+}
+
+bool Teoria_de_Testores::Excl( vi V, int x ){
+   vi am = matrixaceptacion( V );
+   bool cond1 = true, cond2 = false;
+   for( int j = 0; j < Artic; j ++ ){
+        if( MB[j]->getbit(x) == true && am[j] == 0 ){
+           cond1 = false;
+           //break;
+        }
+
+        if( MB[j]->getbit(x) == true )
+            am[j] ++;
+   }
+   bool test = true;
+   for( int j = 0; j < Artic; j ++ )
+        if( am[j] == 0 ){
+            test = false;
+            break;
+        }
+
+   for( int i = 0; i < (int)V.size(); i ++ ){
+        bool no = true;
+        for( int j = 0; j < Artic; j ++ )
+            if( am[j] == 1 && MB[j]->getbit(V[i]) == true ){
+                    no = false;
+                    break;
+            }
+        if( no ){
+            cond2 = true;
+            break;
+        }
+   }
+
+   if( !cond1 && !cond2 && test )
+        TMP.push_back( x );/// es no esclusivo y testor
+
+    return ( cond1 || cond2 || test );
+}
+
+vi Teoria_de_Testores::noExcl( vi V1, vi V ){
+    vi ver;
+    TMP.clear();
+    for( int i = 0; i < (int)V1.size(); i ++ )
+        if( !Excl( V, V1[i] ) )
+            ver.push_back( V1[i] );
+    return ver;
+}
+
+vi Teoria_de_Testores::TypL( vi V1, vi V ){
+  vi am = matrixaceptacion( V );
+  return am;
+}
+
+void Teoria_de_Testores::Algoritmo_BR( matrix original ){
+    ///Ordenamiento
+    Artic = original.getfil();
+    Rasg = original.getcol();
+
+    num_TT = 0;
+    //testores.clear();
+    testt = new bits [tamano];
+
+
+    int c = 1<<30, id = -1, tmpc;
+    for( int i = 0; i < Artic; i ++ ){
+       tmpc = 0;
+       for( int j = 0; j < Rasg; j ++ )
+          if( original.getVaule( i, j ) == "1" )
+             tmpc ++;
+       if( c > tmpc )
+         c = tmpc, id = i;
+    }
+
+   original.swap_fila( 0, id );
+
+   for( int i = 0; i < Rasg; i ++ )
+    if( original.getVaule( 0, i ) == "0" ){
+      for( int j = i+1; j < Rasg; j ++ )
+          if( original.getVaule( 0, j ) == "1" ){
+             original.swap_columna( i, j );
+             break;
+          }
+    }
+
+   conv_a_bits_MB( original );
+
+   mask_TT = new bits( Rasg+1 );
+   Trasg = new QString[Rasg];
+   for( int i = 0; i < Rasg; i ++ )
+       Trasg[i] = original.rasg[i];
+
+   // fil = 3, rasg = 7;
+   // memset( MB1, false, sizeof( MB1 ) );
+    ///Initializatin: 2
+        //X = new bits( rasg + 1 );
+        RL.clear();
+        L.clear();
+        LP.clear();
+        TL.clear();
+        int len_TL = 1;
+        TMP.clear();
+        for( int i = 0; i < Rasg; i ++ )
+            TMP.push_back( i );
+        TL.push_back( TMP );
+        mask = new bits( Rasg+1 );
+        //bits *cero = new bits( Rasg+1 );
+
+        iniciado = true;
+
+        /*
+        1 1 0 0 0 0
+        0 0 1 0 1 1
+        0 1 0 1 1 1
+        */
+
+        /*MB = new bits *[fil];
+        for( int i = 0; i < fil; i ++ )
+            MB[i] = new bits[rasg+1];
+
+        MB[0]->setbit( 0, true );
+        MB[0]->setbit( 1, true );
+        MB[1]->setbit( 2, true );
+        MB[1]->setbit( 4, true );
+        MB[1]->setbit( 5, true );
+        MB[2]->setbit( 1, true );
+        MB[2]->setbit( 3, true );
+        MB[2]->setbit( 4, true );
+        MB[2]->setbit( 5, true );
+        MB1[0][0] = 1;
+        MB1[0][1] = 1;
+        MB1[0][2] = 1;
+        MB1[1][0] = 1;
+        MB1[1][3] = 1;
+        MB1[1][5] = 1;
+        MB1[1][6] = 1;
+        MB1[2][0] = 1;
+        MB1[2][2] = 1;
+        MB1[2][4] = 1;
+        MB1[2][5] = 1;
+        MB1[2][6] = 1;*/
+
+    Process: //3
+        RL = TL[len_TL-1]; //a
+      b3:
+        X = RL[0];         //b
+        if( len_TL == 1 ){ //c
+                if( MB[0]->getbit(X) == false )
+                    goto end_BR;
+                else
+                if( col_testor( X ) ){
+                    /// X es un testor tipico
+                    RL = elim( RL, X );
+                    ///printf("%d \n", X+1);
+                    for( int i = 0; i < Rasg; i ++ )
+                        mask->setbit( i, ( i == X ) );
+                    mask_TT->setbit( X, true );
+                    testt[num_TT] = *mask;
+                    num_TT ++;
+
+                    goto b3;
+                }
+        }
+        L = subst( L, X, len_TL ); //d
+        TL.pop_back(); len_TL --;  //e
+        RL = elim( RL, X ); //f
+        LP = noExcl( RL, L ); //g
+        //TMP = TypL( RL, L ); //h
+        for( int i = 0; i < (int)TMP.size(); i ++ ){
+            //mask = *cero;
+            for( int j = 0; j < Rasg; j ++ ) mask->setbit( j, false );
+            for( int j = 0; j < (int)L.size(); j ++ ){
+                mask->setbit(L[j], true);
+                mask_TT->setbit( L[j], true );
+            }
+                //printf("%d ", L[j]+1);
+            mask->setbit(TMP[i], true);
+            mask_TT->setbit( TMP[i], true );
+            testt[num_TT] = *mask;
+            num_TT ++;
+            //printf("%d\n", TMP[i]+1);
+        }
+
+
+        if( (int)RL.size() > 1 ){ //i
+            TL.push_back( RL ), len_TL ++;
+            if( (int)LP.size() > 1 )
+                TL.push_back( LP ), len_TL ++;
+        }
+        goto Process;
+    end_BR:
+        detener = true;
+}
+
+/** End Algoritmo BR **/
 
 /*
 void Teoria_de_Testores::imprimir( bits tmp1 ){

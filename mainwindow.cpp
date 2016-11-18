@@ -37,3 +37,8 @@ void MainWindow::on_actionAlgoritmo_LEX_triggered()
 {
     v_lex.show();
 }
+
+void MainWindow::on_actionAlgoritmo_BR_triggered()
+{
+    v_br.show();
+}

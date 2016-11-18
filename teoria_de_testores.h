@@ -3,9 +3,13 @@
 #include <bits.h>
 #include <vector>
 #include <matrix.h>
-#define tamano 1000000
+#define tamano 1000005
+#include<bits/stdc++.h>
 
 using namespace std;
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
 class Teoria_de_Testores
 {
@@ -55,6 +59,25 @@ class Teoria_de_Testores
         bool exclu( );
 
         /** End Algoritmo LEX **/
+
+        /** Algoritmo BR **/
+
+        int rasg, fil;
+        int X;
+        vvi TL;
+        vi RL, L, TMP, LP;
+        bool fin;
+
+        vi subst( vi V, int x, int p );
+        vi elim( vi V, int x );
+        bool col_testor( int x );
+        void Algoritmo_BR( matrix );
+        bool Excl( vi V, int x );
+        vi noExcl( vi V1, vi V );
+        vi TypL( vi V1, vi V );
+        vi matrixaceptacion( vi V );
+
+        /** End Algoritmo BR **/
 
 
         //void imprimir( bits );
